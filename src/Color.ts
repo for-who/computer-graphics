@@ -12,8 +12,6 @@ class Color {
     const { r: r1, g: g1, b: b1 } = this
     const { r: r2, g: g2, b: b2 } = other
 
-    const floor = Math.floor
-
     const r = interpolate(r1, r2, factor)
     const g = interpolate(g1, g2, factor)
     const b = interpolate(b1, b2, factor)
