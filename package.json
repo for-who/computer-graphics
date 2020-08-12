@@ -1,0 +1,14 @@
+{
+  "name": "computer-graphics",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:for-who/computer-graphics.git",
+  "author": "Dearest <dearest@abouttime.cn>",
+  "license": "MIT",
+  "scripts": {
+    "start": "parcel ./src/index.html"
+  },
+  "devDependencies": {
+    "typescript": "^3.9.7"
+  }
+}
