@@ -1,6 +1,6 @@
 import Canvas from './Canvas'
 import Color from './Color'
-import Vec2 from './Vec2'
+import Vec3 from './Vec3'
 import Vertex from './Vertex'
 
 const ele = document.getElementById('screen') as HTMLCanvasElement
@@ -13,19 +13,24 @@ function __main() {
 }
 
 function drawTriangle() {
-  const v1 = new Vertex(new Vec2(300, 200), Color.red())
-  const v2 = new Vertex(new Vec2(100, 250), Color.green())
-  const v3 = new Vertex(new Vec2(450, 350), Color.blue())
+  const v1 = new Vertex(new Vec3(300, 200, 10), Color.red())
+  const v2 = new Vertex(new Vec3(100, 250, 10), Color.green())
+  const v3 = new Vertex(new Vec3(450, 350, 10), Color.blue())
+
+  const v4 = new Vertex(new Vec3(300, 250, 0), Color.black())
+  const v5 = new Vertex(new Vec3(100, 300, 0), Color.red())
+  const v6 = new Vertex(new Vec3(450, 400, 0), Color.green())
 
   canvas.drawTriangle(v1, v2, v3)
+  canvas.drawTriangle(v4, v5, v6)
   canvas.render()
 }
 
 function drawTriangleTwoParts() {
-  const v1 = new Vertex(new Vec2(200, 100), Color.red())
-  const v2 = new Vertex(new Vec2(100, 200), Color.green())
-  const v3 = new Vertex(new Vec2(300, 200), Color.blue())
-  const v4 = new Vertex(new Vec2(200, 300), Color.black())
+  const v1 = new Vertex(new Vec3(200, 100), Color.red())
+  const v2 = new Vertex(new Vec3(100, 200), Color.green())
+  const v3 = new Vertex(new Vec3(300, 200), Color.blue())
+  const v4 = new Vertex(new Vec3(200, 300), Color.black())
 
   canvas.drawTriangle1(v1, v2, v3)
   canvas.drawTriangle2(v2, v3, v4)
@@ -34,8 +39,8 @@ function drawTriangleTwoParts() {
 }
 
 function drawLine() {
-  const v1 = new Vertex(new Vec2(100, 100), Color.red())
-  const v2 = new Vertex(new Vec2(300, 100), Color.green())
+  const v1 = new Vertex(new Vec3(100, 100), Color.red())
+  const v2 = new Vertex(new Vec3(300, 100), Color.green())
 
   canvas.drawScanLine(v1, v2)
 

@@ -1,8 +1,8 @@
 import Color from './Color'
-import Vec2 from './Vec2'
+import Vec3 from './Vec3'
 
 class Vertex {
-  constructor(public position: Vec2, public color: Color) {}
+  constructor(public position: Vec3, public color: Color) {}
 
   interpolate(other: Vertex, factor: number) {
     const { position: p1, color: c1 } = this
