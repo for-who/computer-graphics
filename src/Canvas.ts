@@ -1,4 +1,5 @@
 import Color from './Color'
+import Vertex from './Vertex'
 
 class Canvas {
   canvas: HTMLCanvasElement
@@ -40,6 +41,19 @@ class Canvas {
       for (let j = 0; j < this.h; j++) {
         this.setPixel(i, j, color)
       }
+    }
+  }
+
+  //  y1 = y2
+  drawScanLine(v1: Vertex, v2: Vertex) {
+    const { x: x1, y: y1 } = v1.position
+    const { x: x2, y: y2 } = v2.position
+
+    const xLeft = x2 > x1 ? x1 : x2
+    const xRight = x2 > x1 ? x2 : x1
+
+    for (let x = xLeft; x <= xRight; x++) {
+      this.drawPoint(x, y1)
     }
   }
 
