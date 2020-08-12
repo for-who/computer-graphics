@@ -8,6 +8,7 @@ class Canvas {
   h: number
   pixels: ImageData
   bytesPerPixel: number = 4
+  depth: Array<Array<number>>
 
   constructor(canvas: HTMLCanvasElement) {
     this.canvas = canvas
@@ -15,6 +16,9 @@ class Canvas {
     this.w = canvas.width
     this.h = canvas.height
     this.pixels = this.context.getImageData(0, 0, this.w, this.h)
+    this.depth = new Array(this.w).fill(
+      new Array(this.h).fill(Number.NEGATIVE_INFINITY),
+    )
   }
 
   private setPixel(x: number, y: number, color: Color) {
