@@ -53,7 +53,12 @@ class Canvas {
     const xRight = x2 > x1 ? x2 : x1
 
     for (let x = xLeft; x <= xRight; x++) {
-      this.drawPoint(x, y1)
+      // 插值比例
+      const factor = (x - xLeft) / (xRight - xLeft)
+
+      const newColor = v1.color.interpolate(v2.color, factor)
+
+      this.drawPoint(x, y1, newColor)
     }
   }
 
