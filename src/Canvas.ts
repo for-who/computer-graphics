@@ -62,6 +62,20 @@ class Canvas {
     }
   }
 
+  // 三角形上班部分， v1在上， v2, v3 在下， y 相等
+  drawTriangle1(v1: Vertex, v2: Vertex, v3) {
+    const yTop = v1.position.y
+    const yBottom = v2.position.y
+
+    for (let y = yTop + 1; y <= yBottom; y++) {
+      const factor = (y - yTop) / (yBottom - yTop)
+
+      const va = v1.interpolate(v2, factor)
+      const vb = v1.interpolate(v3, factor)
+      this.drawScanLine(va, vb)
+    }
+  }
+
   render() {
     const { pixels, context } = this
     context.putImageData(pixels, 0, 0)
