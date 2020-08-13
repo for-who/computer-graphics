@@ -1,4 +1,5 @@
 import Color from './Color'
+import Vec3 from './Vec3'
 import Vertex from './Vertex'
 
 class Canvas {
@@ -16,9 +17,18 @@ class Canvas {
     this.w = canvas.width
     this.h = canvas.height
     this.pixels = this.context.getImageData(0, 0, this.w, this.h)
-    this.depth = new Array(this.w).fill(
-      new Array(this.h).fill(Number.NEGATIVE_INFINITY),
-    )
+
+    this.depth = []
+    this.clearDepth()
+  }
+
+  clearDepth() {
+    for (let i = 0; i < this.w; i++) {
+      this.depth[i] = []
+      for (let j = 0; j < this.h; j++) {
+        this.depth[i][j] = -Infinity
+      }
+    }
   }
 
   private setPixel(x: number, y: number, color: Color) {
@@ -36,11 +46,19 @@ class Canvas {
     p[offset + 3] = a
   }
 
-  drawPoint(x: number, y: number, color: Color = Color.black()) {
-    this.setPixel(x, y, color)
+  drawPoint(vec: Vec3, color: Color = Color.black()) {
+    const { x, y, z } = vec
+
+    let dep = this.depth[x][y]
+
+    if (z > dep) {
+      this.setPixel(x, y, color)
+      this.depth[x][y] = z
+    }
   }
 
   clear(color: Color = Color.white()) {
+    this.clearDepth()
     for (let i = 0; i < this.w; i++) {
       for (let j = 0; j < this.h; j++) {
         this.setPixel(i, j, color)
@@ -50,19 +68,24 @@ class Canvas {
 
   //  y1 = y2
   drawScanLine(v1: Vertex, v2: Vertex) {
-    const { x: x1, y: y1 } = v1.position
-    const { x: x2, y: y2 } = v2.position
+    const { x: x1, y: y1, z: z1 } = v1.position
+    const { x: x2, y: y2, z: z2 } = v2.position
 
     const xLeft = x2 > x1 ? x1 : x2
     const xRight = x2 > x1 ? x2 : x1
+
+    if (xLeft == xRight) {
+      return
+    }
 
     for (let x = xLeft; x <= xRight; x++) {
       // 插值比例
       const factor = (x - xLeft) / (xRight - xLeft)
 
+      const newPosition = v1.position.interpolate(v2.position, factor)
       const newColor = v1.color.interpolate(v2.color, factor)
 
-      this.drawPoint(x, y1, newColor)
+      this.drawPoint(newPosition, newColor)
     }
   }
 
