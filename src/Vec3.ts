@@ -11,6 +11,12 @@ class Vec3 {
     const v = new Vec3(x, y, z)
     return v
   }
+
+  add(other: Vec3) {
+    this.x = this.x + other.x
+    this.y = this.y + other.y
+    this.z = this.z + other.z
+  }
 }
 
 export default Vec3

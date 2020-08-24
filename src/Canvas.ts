@@ -103,15 +103,12 @@ class Canvas {
   }
 
   drawTriangle(v1: Vertex, v2: Vertex, v3: Vertex) {
-    v1.position = this.project(v1.position)
-    v2.position = this.project(v2.position)
-    v3.position = this.project(v3.position)
+    const va = new Vertex(this.project(v1.position), v1.color)
+    const vb = new Vertex(this.project(v2.position), v2.color)
+    const vc = new Vertex(this.project(v3.position), v3.color)
 
-    console.log(v1, v2, v3)
     // y 从小到大 排列
-    const [va, vb, vc] = [v1, v2, v3].sort(
-      (a, b) => a.position.y - b.position.y,
-    )
+    ;[v1, v2, v3].sort((a, b) => a.position.y - b.position.y)
 
     const middleFactor =
       (vb.position.y - va.position.y) / (vc.position.y - va.position.y)

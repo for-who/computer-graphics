@@ -9,7 +9,26 @@ const canvas = new Canvas(ele)
 function __main() {
   // drawLine()
   // drawTriangleTwoParts()
-  drawTriangle()
+  // drawTriangle()
+  transition()
+}
+
+function transition() {
+  const v1 = new Vertex(new Vec3(0, 0.5, 0), Color.red())
+  const v2 = new Vertex(new Vec3(-0.5, -0.5, 0), Color.green())
+  const v3 = new Vertex(new Vec3(0.5, -0.5, 0), Color.blue())
+
+  const transition = new Vec3(0.01, 0, 0)
+
+  setInterval(() => {
+    canvas.clear()
+    v1.position.add(transition)
+    v2.position.add(transition)
+    v3.position.add(transition)
+
+    canvas.drawTriangle(v1, v2, v3)
+    canvas.render()
+  }, 1000 / 60)
 }
 
 function drawTriangle() {
