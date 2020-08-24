@@ -10,7 +10,7 @@ function __main() {
   // drawLine()
   // drawTriangleTwoParts()
   // drawTriangle()
-  transition()
+  // transition()
 }
 
 function transition() {
