@@ -81,8 +81,6 @@ class Canvas {
 
   //  y1 = y2
   drawScanLine(v1: Vertex, v2: Vertex) {
-    v1.position = this.project(v1.position)
-    v2.position = this.project(v2.position)
     const { x: x1, y: y1, z: z1 } = v1.position
     const { x: x2, y: y2, z: z2 } = v2.position
 
@@ -105,6 +103,11 @@ class Canvas {
   }
 
   drawTriangle(v1: Vertex, v2: Vertex, v3: Vertex) {
+    v1.position = this.project(v1.position)
+    v2.position = this.project(v2.position)
+    v3.position = this.project(v3.position)
+
+    console.log(v1, v2, v3)
     // y 从小到大 排列
     const [va, vb, vc] = [v1, v2, v3].sort(
       (a, b) => a.position.y - b.position.y,
