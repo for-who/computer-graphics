@@ -49,12 +49,25 @@ class Canvas {
   drawPoint(vec: Vec3, color: Color = Color.black()) {
     const { x, y, z } = vec
 
-    let dep = this.depth[x][y]
+    if (x < this.w && y < this.h) {
+      let dep = this.depth[x][y]
 
-    if (z > dep) {
-      this.setPixel(x, y, color)
-      this.depth[x][y] = z
+      if (z > dep) {
+        this.setPixel(x, y, color)
+        this.depth[x][y] = z
+      }
     }
+  }
+
+  // 讲canvas坐标系 转换， 原点在中心
+  project(vec: Vec3) {
+    const { x, y, z } = vec
+    const w2 = this.w / 2
+    const h2 = this.h / 2
+
+    const finalX = x * w2 + w2
+    const finalY = h2 - y * h2
+    return new Vec3(finalX, finalY, z)
   }
 
   clear(color: Color = Color.white()) {
@@ -68,6 +81,8 @@ class Canvas {
 
   //  y1 = y2
   drawScanLine(v1: Vertex, v2: Vertex) {
+    v1.position = this.project(v1.position)
+    v2.position = this.project(v2.position)
     const { x: x1, y: y1, z: z1 } = v1.position
     const { x: x2, y: y2, z: z2 } = v2.position
 

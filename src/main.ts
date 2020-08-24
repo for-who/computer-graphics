@@ -7,9 +7,9 @@ const ele = document.getElementById('screen') as HTMLCanvasElement
 const canvas = new Canvas(ele)
 
 function __main() {
-  // drawLine()
+  drawLine()
   // drawTriangleTwoParts()
-  drawTriangle()
+  // drawTriangle()
 }
 
 function drawTriangle() {
@@ -39,8 +39,8 @@ function drawTriangleTwoParts() {
 }
 
 function drawLine() {
-  const v1 = new Vertex(new Vec3(100, 100), Color.red())
-  const v2 = new Vertex(new Vec3(300, 100), Color.green())
+  const v1 = new Vertex(new Vec3(0, 0), Color.red())
+  const v2 = new Vertex(new Vec3(0.5, 0.5), Color.green())
 
   canvas.drawScanLine(v1, v2)
 
